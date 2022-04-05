@@ -5,10 +5,8 @@
         {% include 'banner.html' %}
 
     {% endblock header %}
-
-    {% block title %}Home {% endblock title %}
-    
     
     {% block content %}
         <h1>Welcome</h1>
+        {% include 'store/products-list.html' %}
     {% endblock %}

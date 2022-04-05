@@ -1,0 +1,62 @@
+<div class="product-container" id="product-container">
+    {% for product in objects %}
+        
+
+        <div class="product-card-container">
+            <ul class="lists-details">
+                
+                <li><i class="fa-solid fa-circle-info"></i></li>
+                {% if product.cpu %}
+
+                    <li><i class="fa-solid fa-microchip"></i>CPU : {{product.cpu}}</li>
+                
+                    {% if product.gpu %}
+                        <li><i class="fa-solid fa-microchip"></i>GPU : {{product.gpu}}</li>
+                    {% endif %}            
+                    {% if product.display %}
+                        <li><i class="fa-solid fa-display"></i>Display: {{product.display}}</li>
+                    {% endif %}
+                    {% if product.rom %}
+                        <li><i class="fa-solid fa-hard-drive"></i>Storage: {{product.rom}}</li>
+                    {% endif %}
+                    
+                    {% if product.ram %}
+                        <li><i class="fa-solid fa-memory"></i> {{product.ram}}</li>
+                    {% endif %}
+                {% else %}
+                    <li> {{product.description}}</li>
+                {% endif %}            
+            </ul>
+
+            <img class="product-img" src="{{product.image_main.url}}" />
+            <h1 class="product-title">{{product.name}}</h1>
+            <h3 class="prix">{{product.price}} Rwf</h3>
+            <div class="container-product-cart-btn">
+
+
+                <button class="product-card-btn">Detail</button>
+                <button class="product-card-btn add-to-cart">Order It</button>
+            </div>
+        </div>
+    {% endfor %}
+
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if objects.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ objects.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ objects.number }} of {{ objects.paginator.num_pages }}.
+            </span>
+    
+            {% if objects.has_next %}
+                <a href="?page={{ objects.next_page_number }}">next</a>
+                <a href="?page={{ objects.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>

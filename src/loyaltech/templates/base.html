@@ -19,7 +19,7 @@
 
         <!-- Webpage Title -->
         <title>
-			{% block title %}{% endblock title %} : Loyal Tech
+			{{ title }} : Loyal Tech
 		</title>
         
         <!-- Styles -->        
@@ -47,5 +47,6 @@
 
 		{% load static %}
         <script src="{% static 'js/nav.js' %}"></script>
+		<script src="{% static 'js/product.js' %}"></script>
 	</body>
 </html>

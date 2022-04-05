@@ -11,11 +11,13 @@ class Category(models.Model):
 class Products(models.Model):
     name=models.CharField(max_length=50)
     price=models.DecimalField(max_digits=10,decimal_places=2)
-    remise=models.DecimalField(max_digits=10,decimal_places=2,default=0)
     category=models.ForeignKey(Category, on_delete=models.CASCADE,default=1)
     ram=models.CharField(max_length=50,blank=True)
     rom=models.CharField(max_length=50,blank=True)
     cpu=models.CharField(max_length=50,blank=True)
+    gpu=models.CharField(max_length=50,blank=True)
+    display=models.CharField(max_length=50,blank=True)
+    description=models.CharField(max_length=50,default='Short Description About The Product')
     image_main=models.ImageField(upload_to='products')
 
 class Order(models.Model):
