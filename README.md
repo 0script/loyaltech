@@ -26,7 +26,8 @@
 * javascript
 
 ##Setup
-  Clone the project install the requirement , create super user and browse.
+
+Clone the project install the requirement , create super user and browse.
   ```shell
   $git clone <repo_url>
   
