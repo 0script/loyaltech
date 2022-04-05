@@ -1,0 +1,97 @@
+
+/* Detail View Styling */
+div.detail-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 0.4rem;
+}
+
+div.detail-container div.image-detail{
+	height: 400px;
+	margin: 5px;
+	width: 50%;
+}
+
+div.detail-container div.image-detail img{
+	height: 100%;
+}
+
+div.detail-container div.specs{
+	width: 50%;
+}
+
+div.detail-container div.specs h1{
+	font-family: 'Rowdies' , sans-serif;
+
+}
+
+div.detail-container div.specs ul{
+	list-style: none;
+}
+
+
+div.detail-container div.specs ul li{
+	padding: 2px;
+	text-align: center;
+}
+
+div.detail-container div.specs ul li span{
+	background-color: greenyellow;
+	padding: 5px;
+	border-radius: 15px;
+
+}
+
+div.detail-container div.specs ul li button{
+	background-color: greenyellow;
+	padding: 5px;
+	border-radius: 15px;
+}
+
+div.detail-container div.specs ul li button:hover{
+	transform: scale(110%);
+	background-color: #ccc;
+}
+
+
+
+
+/* Medim ViewPort Design */
+@media (max-width:950px){	
+	
+	/* Detail responsive */
+	
+	div.detail-container div.image-detail{
+		height: 300px;
+	}
+}
+
+@media (max-width:890px){	
+	
+	/* Detail responsive */
+	
+	div.detail-container{
+		flex-direction: column;
+	}
+
+	div.detail-container div.image-detail{
+		width: 100%;
+	}
+
+	div.detail-container div.specs{
+		width: 1000%;
+	}
+
+	div.detail-container div.specs h1{
+		font-family: 'Rowdies' , sans-serif;
+		color: black;
+		width: 100%;
+		display: block;
+		z-index: 100;
+		position: relative;
+	}
+
+}

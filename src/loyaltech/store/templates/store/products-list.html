@@ -34,8 +34,17 @@
             <div class="container-product-cart-btn">
 
 
-                <button class="product-card-btn">Detail</button>
-                <button class="product-card-btn add-to-cart">Order It</button>
+                <button class="product-card-btn">
+                    <a style="text-decoration:none;" href="{{ product.get_absolute_url }}">
+                        Detail
+                    <a>  
+                </button>
+                <button class="product-card-btn add-to-cart">
+                    
+                    <a style="text-decoration:none;" href="{{product.create_order}}">
+                        Order It
+                    <a>  
+                </button>
             </div>
         </div>
     {% endfor %}

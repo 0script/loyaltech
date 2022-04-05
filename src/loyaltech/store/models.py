@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 import datetime
 # Create your models here.
 
@@ -19,6 +20,14 @@ class Products(models.Model):
     display=models.CharField(max_length=50,blank=True)
     description=models.CharField(max_length=50,default='Short Description About The Product')
     image_main=models.ImageField(upload_to='products')
+    
+    class Meta:
+        ordering=['-id']
+
+    def get_absolute_url(self):
+        return reverse("store:product-detail", kwargs={"id": self.id})
+    def create_order(self):
+        return reverse("store:create-order", kwargs={"id": self.id})
 
 class Order(models.Model):
     product = models.ForeignKey(Products,on_delete=models.CASCADE)
@@ -27,6 +36,5 @@ class Order(models.Model):
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=15,decimal_places=2)
     address = models.CharField(max_length=50,default='', blank=True)
-    phone = models.CharField(max_length=50,blank=False)
     date = models.DateField(default=datetime.datetime.today)
     status = models.BooleanField(default=False)

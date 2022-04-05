@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+    {% block header %}
+        {% include 'head.html' %}
+        {% include 'navbar.html' %}
+    {% endblock header %}
+    
+    {% block content %}
+    <div id="detail-container" class="detail-container">
+      
+        <div class="image-detail">
+          <img src="{{object.image_main.url}}" alt="Product Image" />
+        </div>
+        
+        <div class="specs">
+            <h1>Specifications : {{object.name}}</h1>
+            
+            <ul class="list-specs">
+                {% if object.cpu %}
+                    <li><i class="fa-solid fa-microchip"></i>CPU : {{object.cpu}}</li>
+                {% endif %}
+                {% if object.gpu %}
+                    <li><i class="fa-solid fa-microchip"></i>GPU {{ object.gpu}}</li>    
+                {% endif %}
+                {% if object.display %}
+                    <li><i class="fa-solid fa-display"></i>Display : {{object.display}}</li>
+                {% endif %}
+                {% if object.rom %}
+                    <li><i class="fa-solid fa-hard-drive"></i>Storage : {{object.rom}}</li>
+                {% endif %}
+                {% if object.ram %}
+                    <li><i class="fa-solid fa-memory"></i> RAM : {{object.ram}}</li>
+                {% endif %}
+            
+                <li>
+                    <i class="fa-solid fa-circle-info"></i>
+                    object.description
+                </li>
+                <li>
+                    <span>{{object.price}} Rwf</span>
+                    <button>Order It</button>
+                </li>  
+            <ul>
+        </div>
+      
+      </div>
+
+    {% endblock %}

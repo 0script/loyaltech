@@ -11,8 +11,8 @@ div#product-container{
 
 div.product-card-container{
     font-family: 'Roboto Serif',sans-serif;
-    width: 23vw;
-    height: 32vw;
+    width: 25vw;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;

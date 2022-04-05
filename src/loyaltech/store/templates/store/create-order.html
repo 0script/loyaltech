@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+    {% block header %}
+        {% include 'head.html' %}
+        {% include 'navbar.html' %}
+    {% endblock header %}
+    
+    {% block content %}
+    <div id="detail-container" class="detail-container">
+      
+        <div class="image-detail">
+          <img src="{{object.image_main.url}}" alt="Product Image" />
+        </div>
+        
+        <div class="specs">
+            <h1>Order : {{object.name}}</h1>
+            <form action='.' method="POST">{% csrf_token %}
+                {{form.as_p}}
+                <input type='submit' value='Submit'/>
+            </form>
+        </div>
+      
+      </div>
+
+    {% endblock %}

@@ -3,7 +3,9 @@
 @import 'nav.css';
 @import 'banner.css';
 @import 'product.css';
+@import 'detail.css';
 @import 'footer.css';
+
 
 *{
   box-sizing: border-box
