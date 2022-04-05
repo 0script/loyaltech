@@ -18,7 +18,6 @@ class OrderForm(forms.Form):
         max_length=15,
         required=True,
         label='Phone',
-        
         widget=forms.TextInput(
             attrs={
                 'placeholder':'Enter Your Phone Number',

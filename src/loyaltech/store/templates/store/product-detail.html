@@ -33,11 +33,15 @@
             
                 <li>
                     <i class="fa-solid fa-circle-info"></i>
-                    object.description
+                    {{object.description}}
                 </li>
                 <li>
                     <span>{{object.price}} Rwf</span>
-                    <button>Order It</button>
+                    <button>
+                        <a style="text-decoration:none;" href="{{object.create_order}}">
+                            Order It
+                        <a>  
+                    </button>
                 </li>  
             <ul>
         </div>

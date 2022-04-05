@@ -1,12 +1,11 @@
   <!-- NavBat Start -->
   <ul class="navbar-container" id="navbar-container">
-    <li class="nav-link  active"><a href="#" class="link">home</a></li>
-    <li class="nav-link"><a href="#" class="link">Computers</a></li>
-    <li class="nav-link"><a href="#" class="link">Phones</a></li>
-    <li class="nav-link"><a href="#" class="link">Accessories</a></li>
-    <li class="nav-link"><a href="#" class="link">Others</a></li>
-    <li class="nav-link"><a href="#" class="link">About-Us</a></li>
-    <li class="nav-link"><a href="#" class="link">Contact</a></li>
+    <li class="nav-link  active"><a href="{% url 'store:home' %}" class="link">home</a></li>
+    <li class="nav-link"><a href="{% url 'store:computers' %}" class="link">Computers</a></li>
+    <li class="nav-link"><a href="{% url 'store:phones' %}" class="link">Phones</a></li>
+    <li class="nav-link"><a href="{% url 'store:others' %}" class="link">Others</a></li>
+    <li class="nav-link"><a href="{% url 'store:about' %}" class="link">About-Us</a></li>
+    <li class="nav-link"><a href="{% url 'store:contact' %}" class="link">Contact</a></li>
     <li lass="nav-link">
       <a class="icon" id="icon">
         <i class="fa fa-bars"></i>

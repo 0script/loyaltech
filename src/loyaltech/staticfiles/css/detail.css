@@ -57,6 +57,48 @@ div.detail-container div.specs ul li button:hover{
 }
 
 
+/* order page styling */
+div.specs form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+}
+
+div.specs form form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+}
+
+input.input-name,
+input.Phone,
+input.Addresse{
+	padding: 0.4rem;
+	border-radius: 15px;
+	margin: 5px;
+}
+
+p.alert{
+	text-align: center;
+}
+
+input.submit-order{
+	padding: 0.5rem;
+	border-radius: 15px;
+	background-color: #ccc;	
+}
+
+input.submit-order:hover{
+	transform: scale(120%);
+	background-color: chartreuse;
+	cursor: pointer;
+}
+
+
 
 
 /* Medim ViewPort Design */

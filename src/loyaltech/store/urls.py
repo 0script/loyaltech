@@ -15,7 +15,17 @@ Including another URLconf
 """
 
 from django.urls import path,re_path
-from .views import home_view,search_view,product_detail_view,create_order_view
+from .views import (
+    home_view,
+    search_view,
+    product_detail_view,
+    create_order_view,
+    computers_view,
+    phones_view,
+    others_view,
+    about_view,
+    contact_view
+)
 
 app_name='store'
 urlpatterns = [
@@ -23,5 +33,10 @@ urlpatterns = [
     path('search/',search_view,name='search'),
     path('<int:id>/',product_detail_view,name='product-detail'),
     path('order/<int:id>/',create_order_view,name='create-order'),
+    path('computers/',computers_view,name='computers'),
+    path('phones/',phones_view,name='phones'),
+    path('others/',others_view,name='others'),
+    path('about/',about_view,name='about'),
+    path('contact/',contact_view,name='contact'),
 ]
 

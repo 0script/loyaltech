@@ -5,6 +5,7 @@
     {% endblock header %}
     
     {% block content %}
+    <h1>Order : {{object.name}}</h1>
     <div id="detail-container" class="detail-container">
       
         <div class="image-detail">
@@ -12,10 +13,19 @@
         </div>
         
         <div class="specs">
-            <h1>Order : {{object.name}}</h1>
+            {% if messages %}
+              MESSAGE
+              {% for message in messages %}
+                <div class="alert alert-dismissible alert-success">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <strong>{{message}}<strong>
+                </div>
+              {% endfor %}
+            {% endif %}
             <form action='.' method="POST">{% csrf_token %}
                 {{form.as_p}}
-                <input type='submit' value='Submit'/>
+                <p class="alert"><em>Make sure to enter the wright phone number ,we will call you for confirmation.</em><p>
+                <input class="submit-order" type='submit' value='Submit'/>
             </form>
         </div>
       

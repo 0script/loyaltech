@@ -1,12 +1,40 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
+from django.contrib import messages
 from .models import Products,Order
 from .forms import OrderForm
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.core.mail import send_mail,EmailMessage
+#to send mail
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 
 # Create your views here.
+
+def send_mail(subject,attachement):
+    print('Prepare To send mail')
+    server='smtp.gmail.com'
+    port=587
+    #Setup MIME
+    message=MIMEMultipart()
+    message['From']='zokme00@gmail.com'
+    message['To']='zokme00@gmail.com'
+    message['Subject']=subject
+    message.attach(MIMEText(attachement,'plain'))
+    
+    #Create SMTP session and send the mail
+    session=smtplib.SMTP(server,port)
+    session = smtplib.SMTP(server,port)
+    session.starttls()  #enable security
+    session.login('zokme00@gmail.com','z0kme 00 g00gle.com')
+    msg_str=message.as_string()
+    session.sendmail('zokme00@gmail.com','zokme00@gmail.com',msg_str)
+    session.quit()
+
+    print('Mail Sended')
 
 def home_view(request):
     template_name='store/home.html'
@@ -64,6 +92,7 @@ def create_order_view(request,id):
     obj=get_object_or_404(Products,id=id)
     form=OrderForm(request.POST or None)
     order=None
+    message=""
     if form.is_valid():
         #saving the form
         order=Order.objects.create(
@@ -76,20 +105,95 @@ def create_order_view(request,id):
 
         order.save()
         #include function to send notification
-        print('sending mail')
+        
         subject="Order From : "+order.customer_name
-        message=" Phone : "+order.customer_name
+        message+="Order Id : "+str(order.id)
+        message=" Phone : "+order.customer_phone
         message+="\n Address : "+order.address
         message+="\n Products Name : "+Products.objects.get(id=id).name
-        email = EmailMessage(subject, message, to=['zokme00@gmail.com'])
-        email.send()
-        #send_mail(subject, message,'zokme00@gmail.com', ('zokme00@gmail.com',))
-        print('mail sent')
+        message+="\nPrice : "+str(obj.price)
+        print(message)
+        send_mail(subject, message)
+        messages.success(request, 'Contact request submitted successfully.')
+        return redirect('/')
+    else:
+        messages.error(request, 'Invalid form submission.')
 
     context={
-        'title':order,
+        'title':Order,
         'object':obj,
         'form':form,
     }
 
     return render(request,'store/create-order.html',context)
+
+def computers_view(request):
+
+    template_name='store/home.html'
+    queryset=Products.objects.filter(
+        Q(category__name__contains='Laptop') | Q(category__name__contains='Desktop')
+    )
+
+    paginator=Paginator(queryset,8)
+    page_number=request.GET.get('page')
+    queryset=paginator.get_page(page_number)
+
+    context={
+        'title':'Computer',
+        'objects':queryset,
+    }
+
+    return render(request,template_name,context=context)
+
+def phones_view(request):
+
+    template_name='store/home.html'
+    queryset=Products.objects.filter(
+        Q(category__name__icontains='Phone') | Q(category__name__icontains='Cellphone')|
+        Q(category__name__icontains='Smartphone')
+    )
+
+    paginator=Paginator(queryset,8)
+    page_number=request.GET.get('page')
+    queryset=paginator.get_page(page_number)
+
+    context={
+        'title':'Phones',
+        'objects':queryset,
+    }
+
+    return render(request,template_name,context=context)
+
+
+def others_view(request):
+
+    template_name='store/home.html'
+    excludes=['Phone','Cellphone','Laptop','Desktop']
+
+    queryset=Products.objects.exclude(category__name__in=excludes)
+
+    paginator=Paginator(queryset,8)
+    page_number=request.GET.get('page')
+    queryset=paginator.get_page(page_number)
+
+    context={
+        'title':'Other',
+        'objects':queryset,
+    }
+
+    return render(request,template_name,context=context)
+
+def about_view(request):
+    template_name='about.html'
+    context={
+        'title':'About Us',
+    }
+    return render(request,template_name,context=context)
+
+
+def contact_view(request):
+    template_name='contact.html'
+    context={
+        'title':'Contact',
+    }
+    return render(request,template_name,context=context)
