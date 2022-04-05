@@ -15,7 +15,6 @@ from email.mime.text import MIMEText
 # Create your views here.
 
 def send_mail(subject,attachement):
-    print('Prepare To send mail')
     server='smtp.gmail.com'
     port=587
     #Setup MIME
@@ -34,7 +33,6 @@ def send_mail(subject,attachement):
     session.sendmail('zokme00@gmail.com','zokme00@gmail.com',msg_str)
     session.quit()
 
-    print('Mail Sended')
 
 def home_view(request):
     template_name='store/home.html'
@@ -59,11 +57,9 @@ def search_view(request):
         query=request.GET.get('q')
         
         if query is not None:
-            print(query)
             queryset=Products.objects.filter(
                 Q(name__icontains=query)
-            )    
-            print(queryset)
+            )
             paginator = Paginator(queryset,8)
             page_number=request.GET.get('page')
             queryset=paginator.get_page(page_number)
@@ -112,7 +108,6 @@ def create_order_view(request,id):
         message+="\n Address : "+order.address
         message+="\n Products Name : "+Products.objects.get(id=id).name
         message+="\nPrice : "+str(obj.price)
-        print(message)
         send_mail(subject, message)
         messages.success(request, 'Contact request submitted successfully.')
         return redirect('/')
