@@ -19,8 +19,8 @@ def send_mail(subject,attachement):
     port=587
     #Setup MIME
     message=MIMEMultipart()
-    message['From']='zokme00@gmail.com'
-    message['To']='zokme00@gmail.com'
+    message['From']='email00@gmail.com'
+    message['To']='email00@gmail.com'
     message['Subject']=subject
     message.attach(MIMEText(attachement,'plain'))
     
@@ -28,11 +28,10 @@ def send_mail(subject,attachement):
     session=smtplib.SMTP(server,port)
     session = smtplib.SMTP(server,port)
     session.starttls()  #enable security
-    session.login('zokme00@gmail.com','z0kme 00 g00gle.com')
+    session.login('email@gmail.com','password.com')
     msg_str=message.as_string()
-    session.sendmail('zokme00@gmail.com','zokme00@gmail.com',msg_str)
+    session.sendmail('sender','sender',msg_str)
     session.quit()
-
 
 def home_view(request):
     template_name='store/home.html'
