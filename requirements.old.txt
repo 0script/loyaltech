@@ -1,4 +1,3 @@
 Pillow
 MIME
 django
-trycourier

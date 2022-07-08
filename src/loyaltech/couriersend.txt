@@ -1,0 +1,18 @@
+curl --request POST \
+--url https://api.courier.com/send \
+--header 'Authorization: Bearer YOUR_AUTH_TOKEN_HERE' \
+--data '{
+    "message": {
+      "to": {"email":"loyaltech00@gmail.com"},
+      "template": "8J5MYF8HZGM2BJJZJDAHFV2MNPJ1",
+      "data": {}
+    }
+}'
+
+for the new template
+
+send data as Customer Name : {customer_name}
+Customer Phone : {customer_phone}
+Customer Address : {customer_address}
+Product Name : {product_name}
+Product Price : {product_price}

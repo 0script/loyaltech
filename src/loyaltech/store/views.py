@@ -4,8 +4,9 @@ from django.contrib import messages
 from .models import Products,Order
 from .forms import OrderForm
 from django.core.paginator import Paginator
+from trycourier import Courier
 from django.db.models import Q
-from django.core.mail import send_mail,EmailMessage
+#from django.core.mail import send_mail,EmailMessage
 #to send mail
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -14,24 +15,42 @@ from email.mime.text import MIMEText
 
 # Create your views here.
 
-def send_mail(subject,attachement):
-    server='smtp.gmail.com'
-    port=587
-    #Setup MIME
-    message=MIMEMultipart()
-    message['From']='email00@gmail.com'
-    message['To']='email00@gmail.com'
-    message['Subject']=subject
-    message.attach(MIMEText(attachement,'plain'))
+def send_mail(subject,msg):
     
-    #Create SMTP session and send the mail
-    session=smtplib.SMTP(server,port)
-    session = smtplib.SMTP(server,port)
-    session.starttls()  #enable security
-    session.login('email@gmail.com','password.com')
-    msg_str=message.as_string()
-    session.sendmail('sender','sender',msg_str)
-    session.quit()
+    # #server='smtp.mail.yahoo.com'
+    # port=1234
+    # #Setup MIME
+    # message=MIMEMultipart()
+    # message['From']='loyaltech@proton.me'
+    # message['To']='loyaltech00@gmail.com'
+    # message['Subject']=subject
+    # message.attach(MIMEText(attachement,'plain'))
+    # #R#ndom#1234
+    # #Create SMTP session and send the mail
+    # session=smtplib.SMTP('localhost',port)
+    # #session = smtplib.SMTP_SSL(server,port)
+    # session.starttls()  #enable security
+    # session.login('loyaltech@proton.me','R@ndom@1234')
+    # msg_str=message.as_string()
+    # session.sendmail('sender','sender',msg_str)
+    # session.quit()
+    # Install Courier SDK: pip install trycourier
+
+    client = Courier(auth_token="pk_prod_YEPAGFZ53QMHN2NK2K0PNTNNHEVC")
+
+    resp = client.send_message(
+    message={
+        "to": {
+        "email": "loyaltech00@gmail.com",
+        },
+        "template": "8J5MYF8HZGM2BJJZJDAHFV2MNPJ1",
+        "data": {
+            "Loredm Ipsum": msg
+        },
+    }
+    )
+
+    print(resp['requestId'])
 
 def home_view(request):
     template_name='store/home.html'
@@ -107,8 +126,11 @@ def create_order_view(request,id):
         message+="\n Address : "+order.address
         message+="\n Products Name : "+Products.objects.get(id=id).name
         message+="\nPrice : "+str(obj.price)
-        send_mail(subject, message)
-        messages.success(request, 'Contact request submitted successfully.')
+        try:    
+            send_mail(subject, message)
+        except:
+            print('Error email not sent')
+        #messages.success(request, 'Contact request submitted successfully.')
         return redirect('/')
     else:
         messages.error(request, 'Invalid form submission.')

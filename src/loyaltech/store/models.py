@@ -7,7 +7,8 @@ class Category(models.Model):
     'Category for product'
     name=models.CharField(max_length=50)
     brand=models.CharField(max_length=20,blank=True)
-
+    def __str__(self):
+        return self.name+'-'+self.brand
 
 class Products(models.Model):
     name=models.CharField(max_length=50)
@@ -28,6 +29,9 @@ class Products(models.Model):
         return reverse("store:product-detail", kwargs={"id": self.id})
     def create_order(self):
         return reverse("store:create-order", kwargs={"id": self.id})
+
+    def __str__(self):
+        return self.name
 
 class Order(models.Model):
     product = models.ForeignKey(Products,on_delete=models.CASCADE)
